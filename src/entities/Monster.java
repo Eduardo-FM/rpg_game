@@ -1,21 +1,9 @@
 package entities;
 
-public class Monster {
+public class Monster extends Character {
 
-    private Double lifePoints = 10.00;
-
-    private Integer attack = 5;
-
-    public Double getLifePoints() {
-        return lifePoints;
+    public Monster() {
+        super(10.00, 5);
     }
 
-    public Integer getAttack() {
-        return attack;
-    }
-
-
-    public void lifeDemage(Integer enemyAttackPoints) {
-        this.lifePoints -= enemyAttackPoints;
-    }
 }

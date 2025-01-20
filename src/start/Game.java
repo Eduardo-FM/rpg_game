@@ -28,7 +28,9 @@ public abstract class Game {
             if (action == 1) {
                 if (monster.getLifePoints() != 0) {
                     monster.lifeDemage(player.getAttack());
-                    System.out.println("Monster life points" + monster.getLifePoints());
+                    System.out.println("Monster life points " + monster.getLifePoints());
+                    player.lifeDemage(monster.getAttack());
+                    System.out.println("Player life points " + player.getLifePoints());
                 } else {
                     System.out.println("The monster was destroy");
                 }
