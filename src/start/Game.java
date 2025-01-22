@@ -8,35 +8,42 @@ import java.util.Scanner;
 public abstract class Game {
 
     public static void start(){
-        System.out.println("Choose your character name: ");
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine();
-        System.out.println("You have entered the dungeon.");
-
-        Player player = new Player(name);
-        Monster monster = new Monster();
-        System.out.printf("A monster is attacking %s", name);
-        System.out.println("");
+        Player player = Player.createPlayer();
+        Monster monster = Monster.createMonster(player);
 
         while (monster.getLifePoints() > 0){
-            System.out.println("""
-                    Choose your action:
-                    0 - run
-                    1 - attack
-                    """);
+            playerOptions();
+            Scanner scanner = new Scanner(System.in);
             Integer action = scanner.nextInt();
-            if (action == 1) {
-                if (monster.getLifePoints() != 0) {
-                    monster.lifeDemage(player.getAttack());
-                    System.out.println("Monster life points " + monster.getLifePoints());
-                    player.lifeDemage(monster.getAttack());
-                    System.out.println("Player life points " + player.getLifePoints());
-                } else {
-                    System.out.println("The monster was destroy");
-                }
+
+            switch (action){
+                case (0):
+                    //todo
+                case (1):
+                    battle(player, monster);
+
             }
         }
 
         System.out.println("You have beet your enemy and survive");
+    }
+
+    private static void playerOptions() {
+        System.out.println("""
+                    Choose your action:
+                    0 - run
+                    1 - attack
+                    """);
+    }
+
+    private static void battle(Player player, Monster monster){
+        if (monster.getLifePoints() != 0) {
+            monster.lifeDemage(player.getAttack());
+            System.out.println("Monster life points " + monster.getLifePoints());
+            player.lifeDemage(monster.getAttack());
+            System.out.println("Player life points " + player.getLifePoints());
+        } else {
+            System.out.println("The monster was destroy");
+        }
     }
 }
