@@ -8,10 +8,8 @@ public class Monster extends Character {
         super(10.00, 5);
     }
 
-    public final static Monster createMonster(Player player){
+    public final static Monster createMonster(){
         Monster monster = new Monster();
-        System.out.printf("A monster is attacking %s", player.getName());
-        System.out.println("");
         return monster;
     }
 

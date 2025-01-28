@@ -1,6 +1,7 @@
 package start;
 
 import entities.Monster;
+import entities.Monsters;
 import entities.Player;
 
 import java.util.Scanner;
@@ -9,7 +10,9 @@ public abstract class Game {
 
     public static void start(){
         Player player = Player.createPlayer();
-        Monster monster = Monster.createMonster(player);
+        Monster monster = Monster.createMonster();
+        Monsters monsters = new Monsters();
+        monsters.createMonsters();
 
         while (monster.getLifePoints() > 0){
             playerOptions();
@@ -19,8 +22,10 @@ public abstract class Game {
             switch (action){
                 case (0):
                     //todo
+                    break;
                 case (1):
                     battle(player, monster);
+                    break;
 
             }
         }
