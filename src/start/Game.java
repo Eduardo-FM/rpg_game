@@ -4,34 +4,53 @@ import entities.Monster;
 import entities.Monsters;
 import entities.Player;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Game {
 
-    public static void start(){
+
+    public static void start() {
         Player player = Player.createPlayer();
-        Monster monster = Monster.createMonster();
         Monsters monsters = new Monsters();
         monsters.createMonsters();
 
-        while (monster.getLifePoints() > 0){
-            playerOptions();
-            Scanner scanner = new Scanner(System.in);
-            Integer action = scanner.nextInt();
+        while (player.getLifePoints() > 0) {
+            for (int i = 0; i < monsters.size(); i++) {
+                Monster currentMonster = monsters.get(i);
+                System.out.println("A new monster appears!");
 
-            switch (action){
-                case (0):
-                    //todo
-                    break;
-                case (1):
-                    battle(player, monster);
-                    break;
+                while (currentMonster.getLifePoints() > 0 && player.getLifePoints() > 0) {
+                    playerOptions();
+                    Scanner scanner = new Scanner(System.in);
+                    Integer action = scanner.nextInt();
 
+                    switch (action) {
+                        case 0:
+                            System.out.println("You ran away!");
+                            return;
+                        case 1:
+                            battle(player, currentMonster);
+                        default:
+                            System.out.println("Invalid action. Choose 0 or 1.");
+                    }
+                }
+
+                if (player.getLifePoints() <= 0) {
+                    System.out.println("You were defeated!");
+                    return;
+                }
+
+                System.out.println("Monster defeated!");
             }
+
+            System.out.println("You defeated all the monsters! Another wave is coming...");
+            monsters.createMonsters();
         }
 
-        System.out.println("You have beet your enemy and survive");
+        System.out.println("Game over! You ran out of life points.");
     }
+
 
     private static void playerOptions() {
         System.out.println("""

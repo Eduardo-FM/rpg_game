@@ -19,8 +19,6 @@ public class Character {
         return attack;
     }
 
-
-
     public void lifeDemage(Integer enemyAttackPoints) {
         this.lifePoints -= enemyAttackPoints;
     }
